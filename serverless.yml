@@ -1,0 +1,137 @@
+# The `service` block is the name of the service
+service: serverless-static-website-with-contact-form
+
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: eu-central-1 
+  memory: 128
+  timeout: 10
+  environment:
+#not necessary, because not in use
+#    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+#    SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
+#you have to configure the sender in AWS Console or AWS Cloudformation and verify the Email. This woul be the Adress for sending mails!
+    SENDER_EMAIL: albert.schwarzkopf@unitybox.de
+    EMAIL_SUBJECT: Kontaktanfrage
+    CONFIG_SET: ConfigSet
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - ses:SendEmail
+        - ses:SendRawEmail
+      Resource: "*"
+#not necessary, because not in use
+#    - Effect: Allow
+#      Action:
+#        - dynamodb:Scan
+#        - dynamodb:PutItem
+#      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  sendMail:
+    handler: handler.sendMail
+    description: Send Email using AWS SES Service
+    events:
+      - http:
+          path: sendMail
+          method: post
+          integration: lambda
+          cors: true
+          response:
+            headers:
+              "Access-Control-Allow_Origin": "'*'"
+#not necessary, because not in use
+#  list:
+#    handler: handler.list
+#    description: List all the contact form submissions
+#    events:
+#      - http:
+#          path: list
+#          method: get
+#          integration: lambda
+#          cors: true
+#          response:
+#            headers:
+#              "Access-Control-Allow_Origin": "'*'"
+
+
+#resources:
+#  Resources:
+#not necessary, because not in use
+#    ContactFormDynamoDbTable:
+#      Type: 'AWS::DynamoDB::Table'
+#      DeletionPolicy: Retain
+#      Properties:
+#        AttributeDefinitions:
+#          -
+#            AttributeName: id
+#            AttributeType: S
+#        KeySchema:
+#          -
+#            AttributeName: id
+#            KeyType: HASH
+#        ProvisionedThroughput:
+#          ReadCapacityUnits: 1
+#          WriteCapacityUnits: 1
+#        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+
+resources:
+  Resources:
+    StaticSite:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+        BucketName: ${self:custom.siteName}
+        WebsiteConfiguration:
+          IndexDocument: index.html
+    StaticSiteS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: StaticSite
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Principal: "*"
+              Action:
+              - s3:GetObject
+              Resource:
+                Fn::Join: [
+                  "", [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "StaticSite"
+                    },
+                    "/*"
+                  ]
+                ]
+
+
+#    DnsRecord:
+#      Type: "AWS::Route53::RecordSet"
+#      Properties:
+#        AliasTarget:
+#          DNSName: ${self:custom.aliasDNSName}
+#          HostedZoneId: ${self:custom.aliasHostedZoneId}
+#        HostedZoneName: ${self:custom.siteName}.
+#        Name:
+#          Ref: StaticSite
+#        Type: 'A'
+
+
+  Outputs:
+    HttpUrl:
+      Value: http://${self:custom.siteName}.s3-website.${self:provider.region}.amazonaws.com
+    HttpsUrl:
+      Value: https://s3.${self:provider.region}.amazonaws.com/${self:custom.siteName}/index.html
+    ApiEndpointPost:
+      Value: https://https://xxx.execute-api.xx.amazonaws.com/development/sendMail
+#    ApiEndpointGet:
+#      Value: https://xxxx.execute-api.xx.amazonaws.com/development/list	
+
+
+
+

@@ -1,0 +1,31 @@
+{
+  "name": "serverless-static-website-with-contact-form",
+  "version": "1.0.0",
+  "description": "Serverless Static Website with Contact Form"
+ # "main": "index.js",
+ # "scripts": {
+ #   "test": "test.py"
+  },
+ # "repository": {
+ #   "type": "git",
+ #   "url": "git+https://github.com/faizanbashir/python-ses-dynamodb-contactform.git"
+ # },
+  "keywords": [
+    "python",
+    "aws",
+    "aws-lambda",
+    "serverless",
+    "aws-ses",
+    "aws-dynamodb",
+    "serverless-framework"
+  ],
+ # "author": "",
+ # "license": "MIT",
+ # "bugs": {
+ #   "url": "https://github.com/faizanbashir/python-ses-dynamodb-contactform/issues"
+ # },
+ # "homepage": "https://github.com/faizanbashir/python-ses-dynamodb-contactform#readme"
+  "devDependencies": {
+     "serverless-s3-sync": "^1.7.1"
+   }
+}
