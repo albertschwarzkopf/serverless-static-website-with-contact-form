@@ -1,11 +1,12 @@
 # The `service` block is the name of the service
-service: serverless-static-website-with-contact-form
+service: serverless-static-website-contact-form
 
 
 provider:
   name: aws
   runtime: python3.6
-  region: eu-central-1 
+  stage: dev
+#  region: eu-central-1 
   memory: 128
   timeout: 10
   environment:
@@ -15,7 +16,7 @@ provider:
 #you have to configure the sender in AWS Console or AWS Cloudformation and verify the Email. This woul be the Adress for sending mails!
     SENDER_EMAIL: albert.schwarzkopf@unitybox.de
     EMAIL_SUBJECT: Kontaktanfrage
-    CONFIG_SET: ConfigSet
+#    CONFIG_SET: ConfigSet
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -83,7 +84,7 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         AccessControl: PublicRead
-        BucketName: ${self:custom.siteName}
+        BucketName: ${self:service}
         WebsiteConfiguration:
           IndexDocument: index.html
     StaticSiteS3BucketPolicy:
@@ -109,6 +110,15 @@ resources:
                   ]
                 ]
 
+  Outputs:
+    HttpUrl:
+      Value: http://${self:custom.siteName}.s3-website.${self:provider.region}.amazonaws.com
+    HttpsUrl:
+      Value: https://s3.${self:provider.region}.amazonaws.com/${self:custom.siteName}/index.html
+ #   ApiEndpointPost:
+ #     Value: https://https://xxx.execute-api.xx.amazonaws.com/development/sendMail
+  #    ApiEndpointGet:
+  #      Value: https://xxxx.execute-api.xx.amazonaws.com/development/list	
 
 #    DnsRecord:
 #      Type: "AWS::Route53::RecordSet"
@@ -122,15 +132,20 @@ resources:
 #        Type: 'A'
 
 
-  Outputs:
-    HttpUrl:
-      Value: http://${self:custom.siteName}.s3-website.${self:provider.region}.amazonaws.com
-    HttpsUrl:
-      Value: https://s3.${self:provider.region}.amazonaws.com/${self:custom.siteName}/index.html
-    ApiEndpointPost:
-      Value: https://https://xxx.execute-api.xx.amazonaws.com/development/sendMail
-#    ApiEndpointGet:
-#      Value: https://xxxx.execute-api.xx.amazonaws.com/development/list	
+custom:
+#  hostedZoneName: serverless-zombo.com
+#  aliasHostedZoneId: Z3AQBSTGFYJSTF    # us-east-1
+#  aliasDNSName: s3-website-us-east-1.amazonaws.com
+#  siteName: serverless-static-website-with-contact-form
+  siteName: ${self:service}
+  s3Sync:
+#    bucketName: 
+#      Ref: StaticSite	
+    - bucketName: ${self:service}
+      localDir: static
+
+plugins:
+  - serverless-s3-sync
 
 
 
