@@ -20,14 +20,14 @@ def sendMail(event, context):
 
     try:
         data = event['body']
-	details = {
-	    'firstname': data['firstname'],
-   	    'lastname': data['lastname'],
-	    'mailadress': data['email'],
-	    'message': data['message']
-	}
+        details = {
+            'firstname': data['firstname'],
+            'lastname': data['lastname'],
+            'mailadress': data['email'],
+            'message': data['message']
+        }
 #        content = "Nachricht von " + data['firstname'] + " "  + data['lastname'] + "." + "\n Mailadresse: "  +  data['email']  + ",\n Nachrichteninhalt: " + data['message']
-	    content = (json.dumps(details, sort_keys=False, indent=4))
+        content = (json.dumps(details, sort_keys=False, indent=4))
 #        print('Das Event ist: ' + json.dumps(event))
 #        saveToDynamoDB(data)
         response = sendMailToUser(data, content)
@@ -57,7 +57,7 @@ def sendMail(event, context):
 #    # Insert details into DynamoDB Table
 #    table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
 #    item = {
-        'id': str(uuid.uuid1()),
+#        'id': str(uuid.uuid1()),
 #        'firstname': data['firstname'],
 #        'lastname': data['lastname'],
 #        'email': data['email'],
@@ -91,7 +91,6 @@ def sendMailToUser(data, content):
                 'Text': {
                     'Charset': charset,
                     'Data': content,
-	
                 }
             }
         }

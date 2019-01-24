@@ -12,6 +12,6 @@
     "serverless-framework"
   ],
   "devDependencies": {
-     "serverless-s3-sync": "^1.7.1"
-   }
+    "serverless-s3-sync": "^1.7.1"
+  }
 }

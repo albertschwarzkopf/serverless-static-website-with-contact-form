@@ -16,7 +16,7 @@ provider:
 #you have to configure the sender in AWS Console or AWS Cloudformation and verify the Email. This woul be the Adress for sending mails!
     SENDER_EMAIL: albert.schwarzkopf@unitybox.de
     EMAIL_SUBJECT: Kontaktanfrage
-#    CONFIG_SET: ConfigSet
+    CONFIG_SET: ConfigSet
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -146,7 +146,3 @@ custom:
 
 plugins:
   - serverless-s3-sync
-
-
-
-
