@@ -19,5 +19,5 @@ For deploying static websites with the serverless framework do the following:
 
 <li>Note the given Url for ApiEndpoint for POST and put it in your contact/contact.html.
 
-<li>Deploy again due to sync the files, because you have changed the contact/contact.html:
+<li>You have to sync again  the files, because you have changed the contact/contact.html: serverless deploy -v -r eu-central-1
 <code>serverless deploy -v -r eu-central-1</code>
