@@ -27,3 +27,4 @@ For deploying static websites with the serverless framework do the following:
 Hints:
 <ul>
 <li>Take a short name without uppercase characters for serice, because it ist used by default for Bucket-Name and IAM-Role.</li>
+<li>If you want to save the sent messages in DynamoDB when you can activate this feautre in serverless.yml</li>
