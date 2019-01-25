@@ -10,7 +10,7 @@ provider:
   memory: 128
   timeout: 10
   environment:
-#not necessary, because not in use
+#not necessary, because not in use.
 #    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
 #    SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
 #you have to configure the sender in AWS Console or AWS Cloudformation and verify the Email. This woul be the Adress for sending mails!
@@ -110,15 +110,12 @@ resources:
                   ]
                 ]
 
+
   Outputs:
     HttpUrl:
       Value: http://${self:custom.siteName}.s3-website.${self:provider.region}.amazonaws.com
     HttpsUrl:
       Value: https://s3.${self:provider.region}.amazonaws.com/${self:custom.siteName}/index.html
- #   ApiEndpointPost:
- #     Value: https://https://xxx.execute-api.xx.amazonaws.com/development/sendMail
-  #    ApiEndpointGet:
-  #      Value: https://xxxx.execute-api.xx.amazonaws.com/development/list	
 
 #    DnsRecord:
 #      Type: "AWS::Route53::RecordSet"
@@ -139,10 +136,14 @@ custom:
 #  siteName: serverless-static-website-with-contact-form
   siteName: ${self:service}
   s3Sync:
-#    bucketName: 
-#      Ref: StaticSite	
     - bucketName: ${self:service}
       localDir: static
 
+#not in use
+#  scripts:
+#    hooks:
+#      'aws:deploy:deploy:updateStack': apiendpoint=`sls info --verbose | grep POST | sed 's/  POST - //'`
+
 plugins:
   - serverless-s3-sync
+  - serverless-plugin-scripts
