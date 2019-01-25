@@ -21,7 +21,7 @@ For deploying static websites with the serverless framework do the following:
 <code>sls info --verbose | grep POST | sed 's/  POST - //'</code>
 
 <li>You have to sync again the files, because you have changed the contact form:</li>
-<code>serverless deploy -v -r eu-central-1</code>
+<code>serverless deploy --email youremail@example.de -v -r eu-central-1</code>
 </ol>
 
 Hints:
