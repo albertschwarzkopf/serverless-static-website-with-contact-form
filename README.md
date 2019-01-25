@@ -14,8 +14,8 @@ For deploying static websites with the serverless framework do the following:
 
 <li>Overwrite your static files and folders into the static directory.
   
-<li>Deploy your Stack:</li>
-  <code>serverless deploy -v -r eu-central-1</code>
+<li>Deploy your Stack and put you Email-adress here. This will be used as Sender in SES:</li>
+  <code>serverless deploy --email youremail@example.de -v -r eu-central-1</code>
 
 <li>Note the given Url for ApiEndpoint for POST and put it in your contact-form (e.g. contact/contact.html):</li>
 <code>sls info --verbose | grep POST | sed 's/  POST - //'</code>
