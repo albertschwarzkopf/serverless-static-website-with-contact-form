@@ -14,7 +14,8 @@ provider:
 #    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
 #    SENDER_EMAIL: ${self:custom.secrets.SENDER_EMAIL}
 #you have to configure the sender in AWS Console or AWS Cloudformation and verify the Email. This woul be the Adress for sending mails!
-    SENDER_EMAIL: albert.schwarzkopf@unitybox.de
+#    SENDER_EMAIL: albert.schwarzkopf@unitybox.de
+    SENDER_EMAIL: ${opt:email}
     EMAIL_SUBJECT: Kontaktanfrage
     CONFIG_SET: ConfigSet
   iamRoleStatements:
@@ -146,4 +147,4 @@ custom:
 
 plugins:
   - serverless-s3-sync
-  - serverless-plugin-scripts
+#  - serverless-plugin-scripts
