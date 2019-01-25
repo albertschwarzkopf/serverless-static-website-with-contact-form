@@ -22,3 +22,7 @@ For deploying static websites with the serverless framework do the following:
 
 <li>You have to sync again the files, because you have changed the contact form:</li>
 <code>serverless deploy -v -r eu-central-1</code>
+
+Hints:
+<ul>
+<li>Take a short name without uppercase characters for serice, because it ist used by default for Bucket-Name and IAM-Role.</li>
