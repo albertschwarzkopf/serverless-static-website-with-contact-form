@@ -22,6 +22,7 @@ For deploying static websites with the serverless framework do the following:
 
 <li>You have to sync again the files, because you have changed the contact form:</li>
 <code>serverless deploy -v -r eu-central-1</code>
+</ol>
 
 Hints:
 <ul>
