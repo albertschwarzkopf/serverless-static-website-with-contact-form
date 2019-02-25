@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: python3.6
   stage: dev
-  region: ${opt:region, 'eu-central-1'}
+  region: ${opt:region, 'eu-west-1'}
   memory: 128
   timeout: 10
   environment:
