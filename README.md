@@ -1,6 +1,8 @@
 For deploying static websites with the serverless framework do the following:
 
 <ol>
+<li>Verify your E-Mail in AWS SES. This will be the sender! 
+  
 <li>If not installed, then install serverless framework: </li>
 <code>npm install -g serverless</code>
 
@@ -30,3 +32,8 @@ Hints:
 <ul>
 <li>Take a short name without uppercase characters for serice, because it ist used by default for Bucket-Name and IAM-Role.</li>
 <li>If you want to save the sent messages in DynamoDB when you can activate this feautre in serverless.yml</li>
+
+Todo:
+<li>new_endpoint="var URL "="\"`sls info --verbose | grep POST | sed 's/ POST - //'`\";"
+<li>old_endpoint=`grep "var URL" static/contact/contact.html`
+<li>sed -i "s|$old_endpoint|$new_endpoint|g" static/contact/contact.html
