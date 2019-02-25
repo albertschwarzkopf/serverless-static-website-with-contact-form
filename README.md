@@ -4,13 +4,15 @@ For deploying static websites with the serverless framework do the following:
 <li>If not installed, then install serverless framework: </li>
 <code>npm install -g serverless</code>
 
-<li>Create the service. The Github-repo has to be public!:</li> 
+<li>Create the service in a new folder: </li> 
 <code>serverless create -u https://github.com/albertschwarzkopf/serverless-static-website-with-contact-form -n serverless-static-website-with-contact-form</code>
 
 <li>Go in the new directory.</li>
 
 <li>Install the S3 sync plugin:</li>
 <code>serverless plugin install -n serverless-s3-sync</code>
+
+<li>Change the service name in serverless.yml
 
 <li>Overwrite your static files and folders into the static directory.
   
