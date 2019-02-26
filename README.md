@@ -21,8 +21,10 @@ For deploying static websites with the serverless framework do the following:
 <li>Deploy your Stack and put you Email-adress here. This will be used as Sender in SES:</li>
   <code>serverless deploy --email youremail@example.de -v --region eu-west-1</code>
 
-<li>Note the given Url for ApiEndpoint for POST and put it in your contact-form (e.g. contact/contact.html):</li>
-<code>sls info --verbose | grep POST | sed 's/  POST - //'</code>
+<li>Write the given Api-Endpoint in the Contact-Html-file:</li>
+<code>new_endpoint="var URL "="\"`sls info --verbose | grep POST | sed 's/  POST - //'`\";"</code>
+<code>old_endpoint=`grep "var URL" static/contact/contact.html`</code>
+<code>sed -i "s|$old_endpoint|$new_endpoint|g" static/contact/contact.html</code>
 
 <li>You have to sync again the files, because you have changed the contact form:</li>
 <code>serverless deploy --email youremail@example.de -v --region eu-west-1</code>
