@@ -23,7 +23,9 @@ For deploying static websites with the serverless framework do the following:
 
 <li>Write the given Api-Endpoint in the Contact-Html-file:</li>
 <code>new_endpoint="var URL "="\"`sls info --verbose | grep POST | sed 's/  POST - //'`\";"</code>
+<br>
 <code>old_endpoint=`grep "var URL" static/contact/contact.html`</code>
+<br>
 <code>sed -i "s|$old_endpoint|$new_endpoint|g" static/contact/contact.html</code>
 
 <li>You have to sync again the files, because you have changed the contact form:</li>
