@@ -140,11 +140,11 @@ custom:
     - bucketName: ${self:service}
       localDir: static
 
-#not in use
-#  scripts:
-#    hooks:
-#      'aws:deploy:deploy:updateStack': apiendpoint=`sls info --verbose | grep POST | sed 's/  POST - //'`
+#get the Api-Endpoint and paste it into the contact.html
+  scripts:
+    hooks:
+      'aws:deploy:finalize:cleanup': new_endpoint="var URL "=" \"`sls info --verbose | grep POST | sed 's/  POST - //'`\";" && old_endpoint=`grep "var URL" static/contact/contact.html` && sed -i "s|$old_endpoint|$new_endpoint|g" static/contact/contact.html
 
 plugins:
   - serverless-s3-sync
-#  - serverless-plugin-scripts
+  - serverless-plugin-scripts
