@@ -17,7 +17,7 @@ For deploying static websites with the serverless framework do the following:
 <li>Install the Script Plugin</li>
 <code>npm install --save serverless-plugin-scripts</code>
 
-<li>Change the service name in serverless.yml
+<li>Change the service name in serverless.yml if you want.
 
 <li>Overwrite your static files and folders into the static directory.
   
