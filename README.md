@@ -23,6 +23,7 @@ For deploying static websites with the serverless framework do the following:
   
 <li>Deploy your Stack and put you Email-adress here. This will be used as Sender in SES:</li>
   <code>serverless deploy --email youremail@example.de -v --region eu-west-1</code>
+</ol>
 
 Hints:
 <ul>
