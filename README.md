@@ -1,6 +1,7 @@
 For deploying static websites with the serverless framework do the following:
 
 <ol>
+<li>Set up your AWS credentials on your VM  
 <li>Verify your E-Mail in AWS SES. This will be the sender! 
   
 <li>If not installed, then install serverless framework: </li>
@@ -27,7 +28,7 @@ For deploying static websites with the serverless framework do the following:
 
 Hints:
 <ul>
-<li>Take a short name without uppercase characters for serice, because it ist used by default for Bucket-Name and IAM-Role.</li>
+<li>Take a short name without uppercase characters for service, because it ist used by default for Bucket-Name and IAM-Role.</li>
 <li>If you want to save the sent messages in DynamoDB when you can activate this feautre in serverless.yml</li>
 </ul> 
 
